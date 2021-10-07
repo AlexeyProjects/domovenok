@@ -1,50 +1,55 @@
 <template>
   <div class="">
-    <Fraction
-    :numerator='numerator'
-    :denominator="denominator"
-    ></Fraction>
-
+    <FractionList
+    v-for="(item, key, index) in fractionsList"
+    :fractions="fractionsList[key]"
+    :indexList="key"
+    >
+      
+    </FractionList>
+    <div 
+    @click="fractionsListAdd"
+    class="btn act">
+      Добавить пример
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  watch: {
 
-  },
-  data() {
-    return {
-      numerator: 10,
-      denominator: 100
+  import { mapGetters } from 'vuex'
+
+  export default {
+    watch: {
+
+    },
+    data() {
+      return {
+        testReact: 'noTest'
+      }
+    },
+    computed: {
+      ...mapGetters({
+        fractions: 'fraction/fractions',
+        fractionsList: 'fraction/fractionList'
+      }),
+      fratcionsListTemplate() {
+        console.log(this.fractions)
+        let newArr = this.fractions
+        return newArr
+      }
+    },
+    methods: {
+      fractionsListAdd() {
+        this.$store.commit('fraction/fractionListAdd')
+      }
+    },
+    mounted() {
+
     }
-  },
-  methods: {
-    convertNumber(val) {
-      console.log($event.target.value)
-    }
-  },
-  mounted() {
-    console.log(+'00')
   }
-}
 </script>
 
-<style>
-  html {
-    font-size: 10px;
-  }
-  body {
-    font-size: 1.8rem;
-    font-family: 'Open Sans',sans-serif;
-    padding: 2rem 10rem;
-  }
-  * {
-    box-sizing: border-box;
-    padding:  0;
-    margin: 0;
-  }
-  .row {
-    display: flex;  
-  }
+<style lang="scss">
+  
 </style>
