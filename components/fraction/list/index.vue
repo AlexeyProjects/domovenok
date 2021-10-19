@@ -24,7 +24,7 @@
     <div 
     @click="saveFractionList()"
     class="fraction-list__btn btn">
-      Добавить дробь
+      Сохранить дробь
     </div>
 
     <div 
@@ -55,12 +55,12 @@ export default {
     indexList: 0
   },
   watch: {
-    // fractions: {
-    //   handler(val) {
-    //     console.log('val')
-    //   },
-    //   deep: true
-    // },
+    fractions: {
+      handler: function (val, oldVal) {
+        console.log('a thing changed')
+      },
+      deep: true
+    }
     
   },
   data() {
@@ -77,6 +77,13 @@ export default {
       let items = this.fractions
       
       return this.fractions
+    },
+    computedFraction() {
+      console.log(this.fractions)
+      function computed(obj) {
+        console.log(obj)
+      }
+      computed(...this.fractions)
     },
     newValueForCom() {
       
